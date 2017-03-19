@@ -8,7 +8,7 @@ public class Mokomichi : MonoBehaviour {
 
 	public float spd_player;
 	
-	int []unk = {0,1,2};
+	public Sprite[] spr_banzCatch;
 
 	public enum MokomichiState{
 		stay,		//画面外での生成待ち
@@ -17,14 +17,27 @@ public class Mokomichi : MonoBehaviour {
 		fadeOut,	//怒って帰る
 		catching	//バンズでキャッチ！
 	}
+	public enum BanzCatch{
+		wait,
+		small,
+		nomal,
+		king,
+		golden,
+		non
+	}
 
 	public MokomichiState enu_state;
+	public BanzCatch enu_banz;
 
 	// Use this for initialization
 	void Start () {
-		GetComponent<Rigidbody2D> ().AddForce (new Vector2(50,100));
+		SetSprite (BanzCatch.wait);
 	}
-	
+
+	void SetSprite(BanzCatch setSprite){
+		GetComponent<SpriteRenderer> ().sprite = spr_banzCatch[(int)setSprite];
+	}
+
 	// Update is called once per frame
 	void Update () {
 
@@ -56,6 +69,7 @@ public class Mokomichi : MonoBehaviour {
 
 		case MokomichiState.catching:
 			GetComponent<Rigidbody2D> ().velocity = new Vector2 (0,0);
+
 
 
 			break;
