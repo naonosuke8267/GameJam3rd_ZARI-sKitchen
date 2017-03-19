@@ -452,7 +452,8 @@ PlayerSettings:
   XboxOneAllowedProductIds: []
   XboxOnePersistentLocalStorageSize: 0
   vrEditorSettings: {}
-  cloudServicesEnabled: {}
+  cloudServicesEnabled:
+    UNet: 1
   cloudProjectId: d6dace33-b9a6-45f8-9d6b-8e7e4005ab0d
   projectName: GameJam3rd_ZARI-sKitchen
   organizationId: naonosuke8267
