@@ -40,7 +40,7 @@ public class Create : MonoBehaviour
 		switch (enu_create) {
 		case create.createEbi:
 			x = -3;
-			y = -1.5f;
+			y = -1.7f;
 
 			obj_mousePos.flg_active = false;
 			obj_turiito.flg_active = true;
@@ -53,6 +53,9 @@ public class Create : MonoBehaviour
 			for (i = 0; i < 3; i++) {
 				Instantiate (da [ZARI2 [i]], new Vector3 (x, y), (Quaternion.identity));
 				x += 0.5f;
+				if (ZARI2 [i] == 3) {
+					obj_manager.SetRandom (0);
+				}
 			}
 				
 			enu_create = create.fishing;

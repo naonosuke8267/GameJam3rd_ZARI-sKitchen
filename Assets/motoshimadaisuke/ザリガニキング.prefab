@@ -89,8 +89,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vector_x: 100
-  vector_y: 400
-  num_heavy: 50
+  vector_y: 700
+  num_heavy: 190
   obj_turibito: {fileID: 0}
 --- !u!212 &212026909953204838
 SpriteRenderer:

@@ -32,7 +32,7 @@ public class king : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D col){
 		if(col.tag == "TURIITO"){
 			GetComponent<Rigidbody2D> ().gravityScale = 1;
-        	GetComponent<Rigidbody2D>(). AddForce(new Vector2(vector_x, vector_y));
+			GetComponent<Rigidbody2D>(). AddForce(new Vector2(vector_x + num_heavy / 4, vector_y - (num_heavy * 2)));
 		}
 	}
 }
