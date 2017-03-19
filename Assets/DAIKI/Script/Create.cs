@@ -6,9 +6,11 @@ public class Create : MonoBehaviour
 {
 
     int i;
-    int x = -6, y = -4;
+    float x = -3, y = -1.5f;
 
     public GameObject[] da;
+
+	public Gamemanager obj_manager;
 
     // Use this for initialization
     void Start()
@@ -33,15 +35,14 @@ public class Create : MonoBehaviour
 
     void createEbi()
     {
-        int[] ZARI = new int[] { 0, 1, 2 };
+		int[] ZARI = obj_manager.getRandom();
 
         int[] ZARI2 = ZARI.OrderBy(i => Guid.NewGuid()).ToArray();
 
         for (i = 0; i < 3; i++)
         {
-
-            Instantiate(da[0], new Vector3(x,y), (Quaternion.identity));
-            x += 2;
+			Instantiate(da[ZARI[0]], new Vector3(x,y), (Quaternion.identity));
+            x += 0.5f;
 
 
         }
