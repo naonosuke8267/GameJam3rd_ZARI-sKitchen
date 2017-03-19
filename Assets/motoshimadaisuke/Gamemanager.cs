@@ -6,7 +6,8 @@ public class Gamemanager : MonoBehaviour {
     public int time_end;
     public bool GameEnd;
     public float Score;
-    int[] zari= { 0,1,2};
+    public int []m_ngchip = new int[] { 1, 2, 3 };
+    public int ron;
     public enum type {
         small,
         normal,
@@ -29,6 +30,14 @@ public class Gamemanager : MonoBehaviour {
         {
             GameEnd = true;
         }
+    }
+   int[] random(int ron)
+    {
+       
+        if (ron==4) {
+            m_ngchip[Random.Range(0, 3)] = 4;
+        }
+        return m_ngchip;
     }
     void scene()
     {
