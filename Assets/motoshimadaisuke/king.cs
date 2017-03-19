@@ -7,7 +7,7 @@ public class king : MonoBehaviour {
     public int vector_y;
     // Use this for initialization
     void Start () {
-        set();
+        
 	}
 	
 	// Update is called once per frame

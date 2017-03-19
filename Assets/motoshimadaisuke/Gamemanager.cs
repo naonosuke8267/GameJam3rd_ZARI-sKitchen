@@ -6,7 +6,7 @@ public class Gamemanager : MonoBehaviour {
     public int time_end;
     public bool GameEnd;
     public float Score;
-    public int []m_ngchip = new int[] { 1, 2, 3 };
+    public int []m_ngchip = new int[] { 0, 1, 2 };
     public int ron;
     public enum type {
         small,
