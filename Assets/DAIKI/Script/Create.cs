@@ -9,20 +9,14 @@ public class Create : MonoBehaviour
     float x = -3, y = -1.5f;
 
     public GameObject[] da;
+	public Sprite[] spr_state;
 
 	public Gamemanager obj_manager;
+	public Turibito_MousePoint obj_mousePos;
+	public Turiito obj_turiito;
 
-    // Use this for initialization
-    void Start()
-    {
-        createEbi();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+	private int cnt_fishingWait = 0;
+	public bool flg_fishingClick = false;
 
     public enum create
     {
@@ -32,19 +26,60 @@ public class Create : MonoBehaviour
         momentum,
         fishing
     }
+	private create enu_create;
 
-    void createEbi()
-    {
-		int[] ZARI = obj_manager.getRandom();
+	// Use this for initialization
+	void Start()
+	{
+		enu_create = create.createEbi;
+	}
 
-        int[] ZARI2 = ZARI.OrderBy(i => Guid.NewGuid()).ToArray();
+	// Update is called once per frame
+	void Update()
+	{
+		switch (enu_create) {
+		case create.createEbi:
+			x = -3;
+			y = -1.5f;
 
-        for (i = 0; i < 3; i++)
-        {
-			Instantiate(da[ZARI[0]], new Vector3(x,y), (Quaternion.identity));
-            x += 0.5f;
+			obj_mousePos.flg_active = false;
+			obj_turiito.flg_active = true;
 
+			GetComponent<SpriteRenderer> ().sprite = spr_state [0];
 
-        }
-    }
+			int[] ZARI = obj_manager.getRandom ();
+			int[] ZARI2 = ZARI.OrderBy (i => Guid.NewGuid ()).ToArray ();
+		
+			for (i = 0; i < 3; i++) {
+				Instantiate (da [ZARI2 [i]], new Vector3 (x, y), (Quaternion.identity));
+				x += 0.5f;
+			}
+				
+			enu_create = create.fishing;
+
+			break;
+
+		case create.fishing:
+			if (Input.GetMouseButtonDown (0)) {
+				obj_mousePos.flg_active = true;
+				obj_turiito.flg_active = false;
+				GetComponent<SpriteRenderer> ().sprite = spr_state [1];
+				flg_fishingClick = true;
+			}
+
+			if (flg_fishingClick == true) {
+				cnt_fishingWait++;
+
+				if (cnt_fishingWait == 4) {
+					obj_mousePos.flg_active = false;
+				}else if (cnt_fishingWait == 30) {
+					cnt_fishingWait = 0;
+					flg_fishingClick = false;
+					enu_create = create.createEbi;
+				}
+			}
+
+			break;
+		}
+	}
 }

@@ -7,7 +7,7 @@ public class Gamemanager : MonoBehaviour {
     public bool GameEnd;
     public float Score;
     public int []m_ngchip = new int[] { 0, 1, 2 };
-    public int ron;
+    //public int ron;
     public enum type {
         small,
         normal,
@@ -34,8 +34,9 @@ public class Gamemanager : MonoBehaviour {
 
 	public void SetRandom(int ron)
     {
-        if (ron==4) {
-            m_ngchip[Random.Range(0, 3)] = 4;
+		Debug.Log (ron);
+        if (ron==3) {
+            m_ngchip[Random.Range(0, 3)] = 3;
 		}else{
 			m_ngchip = new int[]{0,1,2};
 		}

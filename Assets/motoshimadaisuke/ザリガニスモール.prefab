@@ -22,9 +22,10 @@ GameObject:
   - component: {fileID: 212730251504415264}
   - component: {fileID: 58728753228165274}
   - component: {fileID: 50763887530395318}
+  - component: {fileID: 114489426794377006}
   m_Layer: 0
   m_Name: "\u30B6\u30EA\u30AC\u30CB\u30B9\u30E2\u30FC\u30EB"
-  m_TagString: Untagged
+  m_TagString: ZARIGANI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -56,12 +57,12 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!58 &58728753228165274
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -71,11 +72,26 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_Offset: {x: 0.2, y: -0.1}
   serializedVersion: 2
-  m_Radius: 0.48138237
+  m_Radius: 0.1
+--- !u!114 &114489426794377006
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1668676543898726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dce849414a626064780974a5f13f06c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vector_x: 100
+  vector_y: 400
+  num_heavy: 0
+  obj_turibito: {fileID: 0}
 --- !u!212 &212730251504415264
 SpriteRenderer:
   m_ObjectHideFlags: 1

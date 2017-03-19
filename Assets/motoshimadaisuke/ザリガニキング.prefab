@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 58155546081795548}
   m_Layer: 0
   m_Name: "\u30B6\u30EA\u30AC\u30CB\u30AD\u30F3\u30B0"
-  m_TagString: Untagged
+  m_TagString: ZARIGANI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -57,12 +57,12 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!58 &58155546081795548
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -72,11 +72,11 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5627004
+  m_Radius: 0.1
 --- !u!114 &114663134582895460
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -88,8 +88,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dce849414a626064780974a5f13f06c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vector_x: 0
-  vector_y: 0
+  vector_x: 100
+  vector_y: 400
+  num_heavy: 50
+  obj_turibito: {fileID: 0}
 --- !u!212 &212026909953204838
 SpriteRenderer:
   m_ObjectHideFlags: 1

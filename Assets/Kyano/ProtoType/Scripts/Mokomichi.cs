@@ -13,6 +13,13 @@ public class Mokomichi : MonoBehaviour {
 	public Collision2D obj_banzCollison;
 	public Gamemanager obj_manager;
 
+	private GameObject obj_hitZarigani;
+
+	public bool flg_banzHit;
+	private bool flg_banzSwing;
+
+	private int cnt_banzWait = 0;
+
 	public enum MokomichiState{
 		stay,		//画面外での生成待ち
 		fadeIn,		//来客
@@ -64,8 +71,8 @@ public class Mokomichi : MonoBehaviour {
 				GetComponent<Rigidbody2D> ().velocity = new Vector2 (GetComponent<Rigidbody2D> ().velocity.x + baf_spdX, GetComponent<Rigidbody2D> ().velocity.y);
 			}
 
-			//下キーでバンズをキャッチ、ステートを移行
-			if (Input.GetButton ("Vertical") && Input.GetAxis("Vertical") < 0) {
+			//下キーでバンズでキャッチ、ステートを移行
+			if (Input.GetButton ("Vertical") && Input.GetAxis ("Vertical") < 0) {
 				enu_state = MokomichiState.catching;
 			}
 
@@ -73,7 +80,48 @@ public class Mokomichi : MonoBehaviour {
 
 		case MokomichiState.catching:
 			GetComponent<Rigidbody2D> ().velocity = new Vector2 (0, 0);
-			SetSprite (BanzCatch.non);
+			
+			if (flg_banzSwing == false) {
+				if (obj_hitZarigani == null) {
+					SetSprite (BanzCatch.non);
+				} else {
+					switch (obj_hitZarigani.name) {
+					case "ザリガニスモール(Clone)":
+						SetSprite (BanzCatch.small);
+						Destroy (obj_hitZarigani);
+						obj_hitZarigani = null;
+						break;
+					case "マザリガニ(Clone)":
+						SetSprite (BanzCatch.nomal);
+						Destroy (obj_hitZarigani);
+						obj_hitZarigani = null;
+						break;
+					case "ザリガニキング(Clone)":
+						SetSprite (BanzCatch.king);
+						Destroy (obj_hitZarigani);
+						obj_hitZarigani = null;
+						break;
+					case "ザリガニゴールデン(Clone)":
+						SetSprite (BanzCatch.golden);
+						Destroy (obj_hitZarigani);
+						obj_hitZarigani = null;
+						break;
+					default:
+						break;//case
+					}
+				}
+				flg_banzSwing = true;
+			} else {
+				cnt_banzWait++;
+				if(cnt_banzWait == 30){
+					flg_banzSwing = false;
+					cnt_banzWait = 0;
+					enu_state = MokomichiState.active;
+					SetSprite (BanzCatch.wait);
+					obj_manager.SetRandom (Random.Range(0,4));
+				}
+			}
+
 
 
 			break;
@@ -81,6 +129,20 @@ public class Mokomichi : MonoBehaviour {
 		default:
 			break;
 		}
+	}
 
+	void OnTriggerStay2D(Collider2D col){
+		if(col.tag == "ZARIGANI"){
+			flg_banzHit = true;
+
+			obj_hitZarigani = col.gameObject;
+		}
+	}
+	void OnTriggerExit2D(Collider2D col){
+		if (col.tag == "ZARIGANI") {
+			flg_banzHit = false;
+
+			obj_hitZarigani = null;
+		}
 	}
 }
