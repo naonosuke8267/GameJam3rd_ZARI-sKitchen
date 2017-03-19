@@ -10,6 +10,8 @@ public class Mokomichi : MonoBehaviour {
 	
 	public Sprite[] spr_banzCatch;
 
+	public Gamemanager obj_manager;
+
 	public enum MokomichiState{
 		stay,		//画面外での生成待ち
 		fadeIn,		//来客
@@ -32,6 +34,7 @@ public class Mokomichi : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		SetSprite (BanzCatch.wait);
+		obj_manager.SetRandom (0);
 	}
 
 	void SetSprite(BanzCatch setSprite){

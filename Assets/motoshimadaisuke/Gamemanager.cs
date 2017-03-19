@@ -31,14 +31,21 @@ public class Gamemanager : MonoBehaviour {
             GameEnd = true;
         }
     }
-   int[] random(int ron)
+
+	public void SetRandom(int ron)
     {
-       
         if (ron==4) {
             m_ngchip[Random.Range(0, 3)] = 4;
-        }
-        return m_ngchip;
+		}else{
+			m_ngchip = new int[]{0,1,2};
+		}
     }
+
+	public int[] getRandom(){
+		return m_ngchip;
+	}
+
+
     void scene()
     {
 
