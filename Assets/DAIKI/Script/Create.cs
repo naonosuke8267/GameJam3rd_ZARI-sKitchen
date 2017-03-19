@@ -6,24 +6,23 @@ public class Create : MonoBehaviour
 {
 
     int i;
+    int x = -6, y = -4;
 
+    public GameObject[] da;
 
     // Use this for initialization
     void Start()
     {
-
+        createEbi();
     }
 
     // Update is called once per frame
     void Update()
     {
-        float x = 3;
-        float y = -2;
 
-        Vector2 Place = new Vector2(x, y).normalized;
     }
 
-    enum create
+    public enum create
     {
         createEbi,
         position,
@@ -40,10 +39,11 @@ public class Create : MonoBehaviour
 
         for (i = 0; i < 3; i++)
         {
-            //switch()
-            // {
 
-            //}
+            Instantiate(da[0], new Vector3(x,y), (Quaternion.identity));
+            x += 2;
+
+
         }
     }
 }
