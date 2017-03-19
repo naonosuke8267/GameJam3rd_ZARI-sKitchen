@@ -10,6 +10,7 @@ public class Mokomichi : MonoBehaviour {
 	
 	public Sprite[] spr_banzCatch;
 
+	public Collision2D obj_banzCollison;
 	public Gamemanager obj_manager;
 
 	public enum MokomichiState{
@@ -71,8 +72,8 @@ public class Mokomichi : MonoBehaviour {
 			break;
 
 		case MokomichiState.catching:
-			GetComponent<Rigidbody2D> ().velocity = new Vector2 (0,0);
-
+			GetComponent<Rigidbody2D> ().velocity = new Vector2 (0, 0);
+			SetSprite (BanzCatch.non);
 
 
 			break;
