@@ -16,11 +16,11 @@ public class Create : MonoBehaviour
 	public Turibito_MousePoint obj_mousePos;
 	public Turiito obj_turiito;
 	public StrGage obj_gage;
+	public RotGage obj_rotGage;
 
 	private int cnt_fishingWait = 0;
 	public bool flg_fishingClick = false;
 
-	private int cnt_momentum = 0;
 
     public enum create
     {
@@ -63,7 +63,7 @@ public class Create : MonoBehaviour
 					obj_manager.SetRandom (0);
 				}
 			}
-			cnt_momentum = 0;
+			//cnt_momentum = 0;
 			enu_create = create.momentum;
 			break;
 		
@@ -72,8 +72,16 @@ public class Create : MonoBehaviour
 			if (Input.GetMouseButtonDown (0)) {
 				obj_gage.flg_accept = true;
 				obj_mousePos.flg_active = true;
+				enu_create = create.angle;
+			}
+			break;
+
+		case create.angle:
+			if (Input.GetMouseButtonDown (0)) {
+				obj_rotGage.flg_accept = true;
 				enu_create = create.fishing;
 			}
+
 			break;
 
 		case create.fishing:
@@ -91,7 +99,7 @@ public class Create : MonoBehaviour
 			if (flg_fishingClick == true) {
 				cnt_fishingWait++;
                     
-                    if (cnt_fishingWait == 4) {
+                if (cnt_fishingWait == 4) {
 					obj_mousePos.flg_active = false;
 				}else if (cnt_fishingWait == 30) {
 					cnt_fishingWait = 0;

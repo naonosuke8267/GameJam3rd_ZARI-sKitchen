@@ -88,9 +88,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dce849414a626064780974a5f13f06c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vector_x: 100
+  vector_x: 60
   vector_y: 700
   num_heavy: 160
+  obj_gage: {fileID: 0}
+  obj_rotGage: {fileID: 0}
   obj_turibito: {fileID: 0}
 --- !u!212 &212924427479132120
 SpriteRenderer:

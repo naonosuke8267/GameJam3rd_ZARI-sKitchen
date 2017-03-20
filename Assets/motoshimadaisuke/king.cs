@@ -8,6 +8,7 @@ public class king : MonoBehaviour {
 	public int num_heavy;
 
 	public StrGage obj_gage;
+	public RotGage obj_rotGage;
 
 	private int cnt_destroy = 0;
 	private bool flg_destroy = false;
@@ -17,6 +18,7 @@ public class king : MonoBehaviour {
     void Start () {
 		obj_turibito = FindObjectOfType<Create> ();
 		obj_gage = FindObjectOfType<StrGage> ();
+		obj_rotGage = FindObjectOfType<RotGage> ();
 	}
 	
 	// Update is called once per frame
@@ -36,7 +38,7 @@ public class king : MonoBehaviour {
 		if(col.tag == "TURIITO"){
 			
 			GetComponent<Rigidbody2D> ().gravityScale = 1;
-			GetComponent<Rigidbody2D>(). AddForce(new Vector2(vector_x + num_heavy / 4, (vector_y - (num_heavy * 2)) * obj_gage.num_gageScale * 1.4f));
+			GetComponent<Rigidbody2D>(). AddForce(new Vector2(vector_x + num_heavy / 4 + Mathf.Abs(obj_rotGage.num_gageRotation), (vector_y - (num_heavy * 2)) * obj_gage.num_gageScale * 1.4f));
 		}
 	}
 }
