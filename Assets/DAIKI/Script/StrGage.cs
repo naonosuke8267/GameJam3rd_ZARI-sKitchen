@@ -13,17 +13,16 @@ public class StrGage : MonoBehaviour
     void Start()
     {
         //transform.localScale = new Vector2(0.756f, y);
-       
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.localScale = new Vector3(0.756f, y);
+        transform.localScale = new Vector3(1.097f, y);
         //y -= 0.1f;
         if(flg == 1)
         {
-            y += 0.1f;
+            y += 0.05f;
             if (y >= 1.09)
             {
                 flg = 0;
@@ -31,7 +30,7 @@ public class StrGage : MonoBehaviour
         }
         else if(flg == 0)
         {
-            y -= 0.1f;
+            y -= 0.05f;
             if (y <= 0)
             {
                 flg = 1;

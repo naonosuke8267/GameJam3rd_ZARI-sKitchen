@@ -9,7 +9,9 @@ public class Mokomichi : MonoBehaviour {
 	public float spd_player;
 	
 	public Sprite[] spr_banzCatch;
-
+	public Sprite[] spr_zariganiOrder;
+	public Sprite[] spr_reaction;
+ 
 	public Collision2D obj_banzCollison;
 	public Gamemanager obj_manager;
 
@@ -19,6 +21,11 @@ public class Mokomichi : MonoBehaviour {
 	private bool flg_banzSwing;
 
 	private int cnt_banzWait = 0;
+	private int rad_order;
+
+
+	static public int[] num_catchZariganis = new int[4]{0,0,0,0};
+
 
 	public enum MokomichiState{
 		stay,		//画面外での生成待ち
@@ -43,10 +50,27 @@ public class Mokomichi : MonoBehaviour {
 	void Start () {
 		SetSprite (BanzCatch.wait);
 		obj_manager.SetRandom (0);
+		SetOrderSprite (0);
+		num_catchZariganis = new int[4]{0,0,0,0};
 	}
 
 	void SetSprite(BanzCatch setSprite){
 		GetComponent<SpriteRenderer> ().sprite = spr_banzCatch[(int)setSprite];
+	}
+	void SetOrderSprite(int num){
+		transform.GetChild (1).GetComponent<SpriteRenderer> ().sprite = spr_zariganiOrder [num];
+	}
+	void SetReactionSprite(int num){
+		transform.GetChild (2).GetComponent<SpriteRenderer> ().sprite = spr_reaction [num];
+	}
+
+	void JudgeOrder(BanzCatch enu_order){
+		if ((int)enu_order == rad_order + 1) {
+			SetReactionSprite (0);
+			num_catchZariganis [rad_order] += 1;
+		} else {
+			SetReactionSprite (2);
+		}
 	}
 
 	// Update is called once per frame
@@ -56,6 +80,7 @@ public class Mokomichi : MonoBehaviour {
 		case MokomichiState.active:
 			//初期化処理
 			float baf_spdX = 0;
+			transform.GetChild (2).GetComponent<SpriteRenderer> ().enabled = false;
 
 			//移動処理:左右キーで移動(滑る)
 			if (Input.GetButton ("Horizontal")) {
@@ -79,30 +104,36 @@ public class Mokomichi : MonoBehaviour {
 			break;
 
 		case MokomichiState.catching:
+			transform.GetChild (2).GetComponent<SpriteRenderer> ().enabled = true;
 			GetComponent<Rigidbody2D> ().velocity = new Vector2 (0, 0);
 			
 			if (flg_banzSwing == false) {
 				if (obj_hitZarigani == null) {
 					SetSprite (BanzCatch.non);
+					SetReactionSprite (1);
 				} else {
 					switch (obj_hitZarigani.name) {
 					case "ザリガニスモール(Clone)":
 						SetSprite (BanzCatch.small);
+						JudgeOrder (BanzCatch.small);
 						Destroy (obj_hitZarigani);
 						obj_hitZarigani = null;
 						break;
 					case "マザリガニ(Clone)":
 						SetSprite (BanzCatch.nomal);
+						JudgeOrder (BanzCatch.nomal);
 						Destroy (obj_hitZarigani);
 						obj_hitZarigani = null;
 						break;
 					case "ザリガニキング(Clone)":
 						SetSprite (BanzCatch.king);
+						JudgeOrder (BanzCatch.king);
 						Destroy (obj_hitZarigani);
 						obj_hitZarigani = null;
 						break;
 					case "ザリガニゴールデン(Clone)":
 						SetSprite (BanzCatch.golden);
+						JudgeOrder (BanzCatch.golden);
 						Destroy (obj_hitZarigani);
 						obj_hitZarigani = null;
 						break;
@@ -116,9 +147,12 @@ public class Mokomichi : MonoBehaviour {
 				if(cnt_banzWait == 30){
 					flg_banzSwing = false;
 					cnt_banzWait = 0;
-					enu_state = MokomichiState.active;
 					SetSprite (BanzCatch.wait);
-					obj_manager.SetRandom (Random.Range(0,4));
+					rad_order = Random.Range (0,4);
+					obj_manager.SetRandom (rad_order);
+					SetOrderSprite (rad_order);
+
+					enu_state = MokomichiState.active;
 				}
 			}
 
