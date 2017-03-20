@@ -5,26 +5,30 @@ using UnityEngine;
 public class Mokomichi : MonoBehaviour {
 
 	private float SPD_MAX = 2;
+    AudioSource emptiness;
+    public AudioClip emptiness_S;
+    AudioSource move;
+    public AudioClip move_S;
+    AudioSource hit;
+    public AudioClip hit_S;
+    public float spd_player;
 
-	public float spd_player;
-	
 	public Sprite[] spr_banzCatch;
 	public Sprite[] spr_zariganiOrder;
 	public Sprite[] spr_reaction;
  
 	public Collision2D obj_banzCollison;
 	public Gamemanager obj_manager;
-
+    public bool end;
 	private GameObject obj_hitZarigani;
-
-	public bool flg_banzHit;
+    public bool flg_banzHit;
 	private bool flg_banzSwing;
 
 	private int cnt_banzWait = 0;
 	private int rad_order;
+    
 
-
-	static public int[] num_catchZariganis = new int[4]{0,0,0,0};
+    static public int[] num_catchZariganis = new int[4]{0,0,0,0};
 
 
 	public enum MokomichiState{
@@ -48,7 +52,11 @@ public class Mokomichi : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		SetSprite (BanzCatch.wait);
+        emptiness = gameObject.GetComponent<AudioSource>();
+        move = gameObject.GetComponent<AudioSource>();
+        hit = gameObject.GetComponent<AudioSource>();
+        
+        SetSprite (BanzCatch.wait);
 		obj_manager.SetRandom (0);
 		SetOrderSprite (0);
 		num_catchZariganis = new int[4]{0,0,0,0};
@@ -81,10 +89,16 @@ public class Mokomichi : MonoBehaviour {
 			//初期化処理
 			float baf_spdX = 0;
 			transform.GetChild (2).GetComponent<SpriteRenderer> ().enabled = false;
-
-			//移動処理:左右キーで移動(滑る)
-			if (Input.GetButton ("Horizontal")) {
-				if (Input.GetAxis ("Horizontal") > 0) {
+               
+                //移動処理:左右キーで移動(滑る)
+                if (Input.GetButton ("Horizontal")) {
+                    if (Input.GetButton("Horizontal"))
+                    {
+                        move.clip = move_S;
+                        move.Play();
+                        
+                    }
+                    if (Input.GetAxis ("Horizontal") > 0) {
 					baf_spdX = spd_player;
 				} else {
 					baf_spdX = -spd_player;
@@ -108,10 +122,16 @@ public class Mokomichi : MonoBehaviour {
 			GetComponent<Rigidbody2D> ().velocity = new Vector2 (0, 0);
 			
 			if (flg_banzSwing == false) {
+
 				if (obj_hitZarigani == null) {
 					SetSprite (BanzCatch.non);
 					SetReactionSprite (1);
-				} else {
+                    emptiness.clip = emptiness_S;
+                    emptiness.Play();
+                    //ここにおとスカ
+                } else {
+                        hit.clip = hit_S;
+                        hit.Play();
 					switch (obj_hitZarigani.name) {
 					case "ザリガニスモール(Clone)":
 						SetSprite (BanzCatch.small);
