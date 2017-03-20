@@ -15,9 +15,12 @@ public class Create : MonoBehaviour
 	public Gamemanager obj_manager;
 	public Turibito_MousePoint obj_mousePos;
 	public Turiito obj_turiito;
+	public StrGage obj_gage;
 
 	private int cnt_fishingWait = 0;
 	public bool flg_fishingClick = false;
+
+	private int cnt_momentum = 0;
 
     public enum create
     {
@@ -60,16 +63,25 @@ public class Create : MonoBehaviour
 					obj_manager.SetRandom (0);
 				}
 			}
-				
-			enu_create = create.fishing;
-
+			cnt_momentum = 0;
+			enu_create = create.momentum;
+			break;
+		
+		case create.momentum:
+			
+			if (Input.GetMouseButtonDown (0)) {
+				obj_gage.flg_accept = true;
+				obj_mousePos.flg_active = true;
+				enu_create = create.fishing;
+			}
 			break;
 
 		case create.fishing:
 
 			if (Input.GetMouseButtonDown (0)) {
-                    fish.Play();
-                    obj_mousePos.flg_active = true;
+				obj_mousePos.flg_fishing = true;
+                fish.Play();
+                obj_mousePos.flg_active = true;
 				obj_turiito.flg_active = false;
 				GetComponent<SpriteRenderer> ().sprite = spr_state [1];
 				flg_fishingClick = true;

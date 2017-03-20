@@ -7,6 +7,8 @@ public class king : MonoBehaviour {
     public int vector_y;
 	public int num_heavy;
 
+	public StrGage obj_gage;
+
 	private int cnt_destroy = 0;
 	private bool flg_destroy = false;
 
@@ -14,6 +16,7 @@ public class king : MonoBehaviour {
     // Use this for initialization
     void Start () {
 		obj_turibito = FindObjectOfType<Create> ();
+		obj_gage = FindObjectOfType<StrGage> ();
 	}
 	
 	// Update is called once per frame
@@ -31,8 +34,9 @@ public class king : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D col){
 		if(col.tag == "TURIITO"){
+			
 			GetComponent<Rigidbody2D> ().gravityScale = 1;
-			GetComponent<Rigidbody2D>(). AddForce(new Vector2(vector_x + num_heavy / 4, vector_y - (num_heavy * 2)));
+			GetComponent<Rigidbody2D>(). AddForce(new Vector2(vector_x + num_heavy / 4, (vector_y - (num_heavy * 2)) * obj_gage.num_gageScale * 1.4f));
 		}
 	}
 }

@@ -8,6 +8,7 @@ public class Turibito_MousePoint : MonoBehaviour {
 	private float LEFTMAXPOS = -2.1f;
 
 	public bool flg_active = false;
+	public bool flg_fishing = false;
 
 	private float spd_mouse;
 
@@ -22,7 +23,11 @@ public class Turibito_MousePoint : MonoBehaviour {
 	void Update () {
 
 		if (flg_active == true) {
-			GetComponent<CircleCollider2D> ().enabled = true;
+			if (flg_fishing == true) {
+				GetComponent<CircleCollider2D> ().enabled = true;
+				flg_fishing = false;
+			}
+
 		} else {
 			//Debug.Log (gameObject.transform.localPosition);
 
