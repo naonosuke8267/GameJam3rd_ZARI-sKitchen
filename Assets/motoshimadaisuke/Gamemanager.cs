@@ -40,7 +40,8 @@ public class Gamemanager : MonoBehaviour {
         if(time_end == 1)
         {
             GameEnd = true;
-            SceneManager.LoadScene("title", LoadSceneMode.Additive);
+            Debug.Log("許さん");
+            SceneManager.LoadScene("Result", LoadSceneMode.Single);
         }
     }
 
