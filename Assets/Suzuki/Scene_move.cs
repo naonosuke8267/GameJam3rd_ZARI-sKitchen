@@ -14,7 +14,7 @@ public class Scene_move : MonoBehaviour {
 	void Update () {
         if (Input.anyKeyDown)
         {
-            SceneManager.LoadScene("main", LoadSceneMode.Additive);
+            SceneManager.LoadScene("main", LoadSceneMode.Single);
         }
     }
 }
