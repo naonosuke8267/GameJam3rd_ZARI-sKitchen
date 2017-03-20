@@ -18,20 +18,22 @@ public class timer : MonoBehaviour
 
     void Update()
     {
-        if (timer_flg == 0)
-        {
-           
-            //1秒に1ずつ減らしていく
-            time -= Time.deltaTime;
-            //マイナスは表示しない
-            if (time < 0)
+        if (Gamemanager.GameState==Gamemanager.State.Playing) {
+            if (timer_flg == 0)
             {
-                
-                obj_manager.time_end = 1;
 
-                timer_flg = 1;
+                //1秒に1ずつ減らしていく
+                time -= Time.deltaTime;
+                //マイナスは表示しない
+                if (time < 0)
+                {
+
+                    obj_manager.time_end = 1;
+
+                    timer_flg = 1;
+                }
+                GetComponent<Text>().text = ((int)time).ToString();
             }
-            GetComponent<Text>().text = ((int)time).ToString();
         }
     }
 }

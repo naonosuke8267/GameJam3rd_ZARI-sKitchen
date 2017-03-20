@@ -15,45 +15,56 @@ public class Gamemanager : MonoBehaviour {
         Golden
     }
     public enum State {
-        Playing,
         Title,
+        Playing,
         Result
     }
     public type _Type;
+    static public State GameState;
 
     // Use this for initialization
     void Start()
     {
         StartCoroutine(GameLoop());
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update () {
         
     }
 
     IEnumerator GameLoop()
     {
-        yield return Title();
-        yield return Playing();
-        yield return Result();
-        yield return null;
+        while (true)
+        {
+            switch (GameState)
+            {
+                case State.Title:
+                    yield return Title();
+                    break;
+                case State.Playing:
+                    yield return Playing();
+                    break;
+                case State.Result:
+                    yield return Result();
+                    break;
+            }
+        }
     }
 
     IEnumerator Title()
     {
         var titleCanvas = GameObject.Find("Title_canvas");
-        Debug.Log("殺す");
         if (Input.GetKey(KeyCode.Space))
         {
             titleCanvas.SetActive(false);  //非表示処理
+            yield return GameState=State.Playing;
         }
-        yield return null;
     }
 
     IEnumerator Result()
     {
-        var resultCanvas = GameObject.Find("Result_canvas");
+        
         yield return null;
     }
 
@@ -62,7 +73,7 @@ public class Gamemanager : MonoBehaviour {
         time();
         if (GameEnd == true)
         {
-            yield return null;
+            yield return GameState = State.Result;
         }
     }
 
