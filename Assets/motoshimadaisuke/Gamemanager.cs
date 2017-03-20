@@ -43,7 +43,7 @@ public class Gamemanager : MonoBehaviour {
     IEnumerator Title()
     {
         var titleCanvas = GameObject.Find("Title_canvas");
-        Debug.Log("殺す");
+        
         if (Input.GetKey(KeyCode.Space))
         {
             titleCanvas.SetActive(false);  //非表示処理
