@@ -12,6 +12,7 @@ public class score : MonoBehaviour {
 
 	void Start()
 	{
+		num_score = 0;
 		GetComponent<Text>().text = num_score.ToString();
 	}
 

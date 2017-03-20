@@ -6,7 +6,8 @@ public class mianScore : MonoBehaviour {
     public int many;
 	// Use this for initialization
 	void Start () {
-        many = Mokomichi.num_catchZariganis[3];//ここを変える
+		many = score.num_score;
+        //many = Mokomichi.num_catchZariganis[3];//ここを変える
         GetComponent<Text>().text = ((int)many).ToString();
     }
 	
