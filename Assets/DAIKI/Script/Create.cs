@@ -70,6 +70,7 @@ public class Create : MonoBehaviour
 		case create.momentum:
 			
 			if (Input.GetMouseButtonDown (0)) {
+				Debug.Log (obj_gage);
 				obj_gage.flg_accept = true;
 				obj_mousePos.flg_active = true;
 				enu_create = create.angle;
@@ -79,6 +80,7 @@ public class Create : MonoBehaviour
 		case create.angle:
 			if (Input.GetMouseButtonDown (0)) {
 				obj_rotGage.flg_accept = true;
+				obj_gage.flg_complete = false;
 				enu_create = create.fishing;
 			}
 
@@ -88,6 +90,7 @@ public class Create : MonoBehaviour
 
 			if (Input.GetMouseButtonDown (0)) {
 				obj_mousePos.flg_fishing = true;
+				obj_rotGage.flg_complete = false;
                 fish.Play();
                 obj_mousePos.flg_active = true;
 				obj_turiito.flg_active = false;
