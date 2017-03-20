@@ -412,17 +412,16 @@ RectTransform:
 --- !u!114 &202327625
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114636650954504604, guid: 281a75e53bd98da4a99dfb6272a42c9c,
-    type: 2}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 202327623}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 983c16c1510145f4e8fd16737f004ad1, type: 3}
+  m_Script: {fileID: 11500000, guid: f3aed9308a55f5f46b27329e4743ad3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obj_manager: {fileID: 0}
-  time: 60
+  obj_manager: {fileID: 1807624127}
+  num_score: 0
 --- !u!114 &202327626
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2121,6 +2120,11 @@ Prefab:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1526654491}
+    - target: {fileID: 114636650954504604, guid: 281a75e53bd98da4a99dfb6272a42c9c,
+        type: 2}
+      propertyPath: obj_manager
+      value: 
+      objectReference: {fileID: 1807624127}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 281a75e53bd98da4a99dfb6272a42c9c, type: 2}
   m_IsPrefabParent: 0

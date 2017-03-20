@@ -76,6 +76,7 @@ public class Mokomichi : MonoBehaviour {
 		if ((int)enu_order == rad_order + 1) {
 			SetReactionSprite (0);
 			num_catchZariganis [rad_order] += 1;
+			obj_manager.score (rad_order,500);
 		} else {
 			SetReactionSprite (2);
 		}

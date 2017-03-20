@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class Gamemanager : MonoBehaviour {
     public int time_end=0;
     public bool GameEnd ;
-    public float Score;
+	public int Score;
     public int []m_ngchip = new int[] { 0, 1, 2 };
     //public int ron;
     public enum type {
@@ -26,7 +26,7 @@ public class Gamemanager : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        
+		Score = 0;
     }
 
     // Update is called once per frame
@@ -64,23 +64,23 @@ public class Gamemanager : MonoBehaviour {
     {
 
     }
-    void score(type _Type  ,int second)
+	public void score(int type  ,int second)
     {
 
-        switch (_Type)
+		switch (type)
         {
 
-            case type.small:
-                Score +=(500-second)+10;
+            case 0:
+                Score += 500;
                 break;
-            case type.normal:
-                Score += (500 - second) + 10;
+            case 1:
+                Score += 300;
                 break;
-            case type.large:
-                Score += (500 - second) + 10;
+            case 2:
+                Score += 500;
                 break;
-            case type.Golden:
-                Score += (500 - second) + 100;
+            case 3:
+                Score += 2000;
                 break;
         }
 
