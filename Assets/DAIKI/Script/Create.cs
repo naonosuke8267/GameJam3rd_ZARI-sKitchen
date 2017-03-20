@@ -7,7 +7,8 @@ public class Create : MonoBehaviour
 
     int i;
     float x = -3, y = -1.5f;
-
+     AudioSource fish;
+    public AudioClip fish_S;
     public GameObject[] da;
 	public Sprite[] spr_state;
 
@@ -31,7 +32,9 @@ public class Create : MonoBehaviour
 	// Use this for initialization
 	void Start()
 	{
-		enu_create = create.createEbi;
+        fish = gameObject.GetComponent<AudioSource>();
+        fish.clip=fish_S;
+       enu_create = create.createEbi;
 	}
 
 	// Update is called once per frame
@@ -63,17 +66,20 @@ public class Create : MonoBehaviour
 			break;
 
 		case create.fishing:
+
 			if (Input.GetMouseButtonDown (0)) {
-				obj_mousePos.flg_active = true;
+                    fish.Play();
+                    obj_mousePos.flg_active = true;
 				obj_turiito.flg_active = false;
 				GetComponent<SpriteRenderer> ().sprite = spr_state [1];
 				flg_fishingClick = true;
+                   
 			}
 
 			if (flg_fishingClick == true) {
 				cnt_fishingWait++;
-
-				if (cnt_fishingWait == 4) {
+                    
+                    if (cnt_fishingWait == 4) {
 					obj_mousePos.flg_active = false;
 				}else if (cnt_fishingWait == 30) {
 					cnt_fishingWait = 0;
@@ -81,7 +87,7 @@ public class Create : MonoBehaviour
 					enu_create = create.createEbi;
 				}
 			}
-
+             
 			break;
 		}
 	}
