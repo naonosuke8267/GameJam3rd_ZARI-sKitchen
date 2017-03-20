@@ -18,7 +18,7 @@ public class timer : MonoBehaviour
 
     void Update()
     {
-        if (Gamemanager.GameState==Gamemanager.State.Playing) {
+        //if (Gamemanager.GameState==Gamemanager.State.Playing) {
             if (timer_flg == 0)
             {
 
@@ -34,6 +34,6 @@ public class timer : MonoBehaviour
                 }
                 GetComponent<Text>().text = ((int)time).ToString();
             }
-        }
+        //}
     }
 }

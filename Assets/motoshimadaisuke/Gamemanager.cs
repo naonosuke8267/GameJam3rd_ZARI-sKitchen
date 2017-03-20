@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Gamemanager : MonoBehaviour {
     public int time_end=0;
@@ -25,56 +26,12 @@ public class Gamemanager : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        StartCoroutine(GameLoop());
+        
     }
 
     // Update is called once per frame
     void Update () {
-        
-    }
-
-    IEnumerator GameLoop()
-    {
-        while (true)
-        {
-            switch (GameState)
-            {
-                case State.Title:
-                    yield return Title();
-                    break;
-                case State.Playing:
-                    yield return Playing();
-                    break;
-                case State.Result:
-                    yield return Result();
-                    break;
-            }
-        }
-    }
-
-    IEnumerator Title()
-    {
-        var titleCanvas = GameObject.Find("Title_canvas");
-        if (Input.GetKey(KeyCode.Space))
-        {
-            titleCanvas.SetActive(false);  //非表示処理
-            yield return GameState=State.Playing;
-        }
-    }
-
-    IEnumerator Result()
-    {
-        
-        yield return null;
-    }
-
-    IEnumerator Playing()
-    {
         time();
-        if (GameEnd == true)
-        {
-            yield return GameState = State.Result;
-        }
     }
 
 
@@ -83,6 +40,7 @@ public class Gamemanager : MonoBehaviour {
         if(time_end == 1)
         {
             GameEnd = true;
+            SceneManager.LoadScene("title", LoadSceneMode.Additive);
         }
     }
 
